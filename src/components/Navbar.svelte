@@ -1,28 +1,48 @@
 <script lang="ts">
   import clsx from "clsx";
+  import { onDestroy } from "svelte";
+  import { useMediaQuery } from "../hooks/useMediaQuery";
   import NavList from "./NavList.svelte";
 
   let toggle = false;
   let isScroll = false;
+  let isTablet = useMediaQuery("(min-width: 768px)");
+  const unsubscribe = isTablet.subscribe((value) => (isTablet = value));
+  $: if(isTablet) {
+    toggle = false;
+    isScroll = false;
+  };
+
   const handleToggleChange = () => {
     toggle = !toggle;
   };
-  $: window.addEventListener("scroll", () => {
+
+  const handleScroll = () => {
+    if(isTablet) return;
     isScroll = window.scrollY > 10;
-  })
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  onDestroy(() => {
+    unsubscribe();
+    window.removeEventListener("scroll", handleScroll);
+  });
 </script>
 
-<header class={clsx("fixed w-full top-0 z-50 transition-colors", isScroll && "bg-black")}>
-  <nav class="max-w-xs mx-auto py-8 flex justify-between items-center">
+<header class={clsx("w-full top-0 z-50 transition-colors", isScroll && "bg-black", isTablet ? "absolute" : "fixed")}>
+  <nav class="max-w-xs mx-auto py-8 flex justify-between items-center md:max-w-2xl">
     <img
       src="/assets/logo.svg"
       alt="Brand Logo"
-      class="w-[9.75rem] object-contain cursor-pointer"
+      class="w-[9.75rem] object-contain cursor-pointer md:w-28"
     />
     <aside>
-      <button on:click={handleToggleChange}>
-        <img src={`/assets/icon-${toggle ? "close" : "hamburger"}.svg`} alt="Toggle" />
-      </button>
+      {#if !isTablet}
+        <button on:click={handleToggleChange}>
+          <img src={`/assets/icon-${toggle ? "close" : "hamburger"}.svg`} alt="Toggle" />
+        </button>
+      {/if}
       <NavList isOpen={toggle} />
     </aside>
   </nav>

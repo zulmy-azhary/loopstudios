@@ -35,9 +35,14 @@
   ];
 </script>
 
-<section class="max-w-xs mx-auto mt-20">
+<section class="max-w-xs mx-auto mt-20 grid grid-cols-1 gap-y-12 place-items-center">
   <h2 class="font-light text-3xl font-josefin uppercase text-center">Our Creations</h2>
-  <div class="grid grid-cols-1 gap-y-6 ">
+  <button
+    class="font-alata font-extralight py-2 w-32 tracking-widest text-black border-[1px] border-black text-sm uppercase order-last"
+  >
+    See All
+  </button>
+  <div class="grid grid-cols-1 gap-y-6">
     {#each creations as creation}
       <figure class="relative">
         <img src={`/assets/mobile/image-${creation.src}.jpg`} alt={creation.title} />
@@ -49,9 +54,4 @@
       </figure>
     {/each}
   </div>
-  <button
-    class="font-alata font-extralight py-2 w-32 tracking-widest text-black border-[1px] border-black text-sm uppercase"
-  >
-    See All
-  </button>
 </section>
