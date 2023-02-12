@@ -1,4 +1,10 @@
 <script lang="ts">
+  import Button from "./Button.svelte";
+  import Heading from "./Heading.svelte";
+  import Section from "./Section.svelte";
+
+  export let isTablet: boolean;
+
   const creations = [
     {
       title: "Deep Earth",
@@ -35,23 +41,23 @@
   ];
 </script>
 
-<section class="max-w-xs mx-auto mt-20 grid grid-cols-1 gap-y-12 place-items-center">
-  <h2 class="font-light text-3xl font-josefin uppercase text-center">Our Creations</h2>
-  <button
-    class="font-alata font-extralight py-2 w-32 tracking-widest text-black border-[1px] border-black text-sm uppercase order-last"
-  >
-    See All
-  </button>
-  <div class="grid grid-cols-1 gap-y-6">
+<Section class="grid grid-cols-1 gap-y-12 place-items-center md:gap-y-6 md:grid-cols-2">
+  <Heading class="text-center md:justify-self-start md:text-start">Our Creations</Heading>
+  <Button>See All</Button>
+  <div class="grid grid-cols-1 gap-6 md:gap-5 md:grid-cols-12 w-full md:col-span-2">
     {#each creations as creation}
-      <figure class="relative">
-        <img src={`/assets/mobile/image-${creation.src}.jpg`} alt={creation.title} />
+      <figure class="relative col-span-1 md:col-span-4 group cursor-pointer">
+        <img
+          src={`/assets/${isTablet ? "desktop" : "mobile"}/image-${creation.src}.jpg`}
+          alt={creation.title}
+          class="w-full object-cover group-hover:opacity-20 transition-opacity"
+        />
         <figcaption
-          class="absolute bottom-4 left-5 text-white font-josefin font-light text-2xl uppercase w-2/5"
+          class="absolute bottom-4 left-5 text-white font-josefin font-light text-2xl uppercase w-2/5 md:w-[45%] md:text-lg group-hover:text-black transition-colors"
         >
           {creation.title}
         </figcaption>
       </figure>
     {/each}
   </div>
-</section>
+</Section>

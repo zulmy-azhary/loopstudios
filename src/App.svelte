@@ -4,12 +4,15 @@
   import Hero from "./components/Hero.svelte";
   import Interactive from "./components/Interactive.svelte";
   import Navbar from "./components/Navbar.svelte";
+  import { useMediaQuery } from "./hooks/useMediaQuery";
+
+  let isTablet = useMediaQuery("(min-width: 768px)");
 </script>
 
 <main>
-  <Navbar />
+  <Navbar isTablet={$isTablet} />
   <Hero />
   <Interactive />
-  <Creations />
+  <Creations isTablet={$isTablet} />
   <Footer />
 </main>
