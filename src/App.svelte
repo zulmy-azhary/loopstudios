@@ -9,8 +9,8 @@
   let isTablet = useMediaQuery("(min-width: 768px)");
 </script>
 
+<Navbar isTablet={$isTablet} />
 <main>
-  <Navbar isTablet={$isTablet} />
   <Hero />
   <Interactive />
   <Creations isTablet={$isTablet} />

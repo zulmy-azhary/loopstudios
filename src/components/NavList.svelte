@@ -11,7 +11,7 @@
     isOpen ? "right-0" : "-right-full"
   )}
 >
-  <ul class={"flex flex-col gap-y-8 h-full justify-center max-w-xs mx-auto md:flex-row md:gap-x-4"}>
-    <NavItems class="uppercase text-4xl font-josefin font-extralight md:normal-case md:text-base" />
+  <ul class={"flex flex-col gap-y-8 h-full justify-center max-w-xs mx-auto md:max-w-full md:flex-row md:gap-x-6 xl:gap-x-8"}>
+    <NavItems class="uppercase text-4xl font-josefin font-extralight md:normal-case md:text-sm md:font-normal lg:text-base" />
   </ul>
 </div>
